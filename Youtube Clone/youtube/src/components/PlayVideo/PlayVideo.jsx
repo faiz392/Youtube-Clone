@@ -6,7 +6,6 @@ const Playvideo = () => {
     <div className="play-video">
       <video src="/assets/video.mp4" controls autoPlay muted />
       <h3>Just a video</h3>
-      <hr />
       <div className="play-video-info">
         <p>1500 views &bull; 2 days ago</p>
         <div>
@@ -26,7 +25,10 @@ const Playvideo = () => {
             Save
           </span>
         </div>
-        <div className="publisher">
+        
+      </div>
+      <hr/>
+      <div className="publisher">
           <img src="/assets/tom.png" alt="" />
           <div>
             <p>Chai aur code</p>
@@ -68,7 +70,6 @@ const Playvideo = () => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };

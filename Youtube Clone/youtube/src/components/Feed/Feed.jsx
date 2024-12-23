@@ -1,8 +1,12 @@
 import React from 'react'
 import './feed.css'
 import {Link} from 'react-router-dom'
+import { API_KEY } from '../../data'
 
-const Feed = () => {
+const Feed = ({category}) => {
+    const fetch_data=async (params) => {
+        const videoList_url=`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category}&key=${API_KEY}`
+    }
   return (
     <div className='feed'>
         <Link to={`video/20/13`} className="card">
