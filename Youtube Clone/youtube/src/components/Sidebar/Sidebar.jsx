@@ -11,7 +11,7 @@ const Sidebar = ({sidebar,category,setCategory}) => {
         </div>
         <div className={`side-link ${category===20?'active':""}`} onClick={()=>setCategory(20)}>
           <img src="/assets/game_icon.png" alt="" />
-          <p>Game</p>
+          <p>Gaming</p>
         </div>
         <div className={`side-link ${category===2?'active':""}`} onClick={()=>setCategory(2)}>
           <img src="/assets/automobiles.png" alt="" />

@@ -1,12 +1,13 @@
 import React from "react";
 import "./Navbar.css"
+import { Link } from "react-router-dom";
 
 const Navbar = ({setSidebar}) => {
   return (
     <nav className="flex-div">
       <div className="flex-div nav-left">
         <img className="menu" onClick={()=>setSidebar((prev)=>!prev)} src="/assets/menu.png" alt="" />
-        <img className="logo" src="/assets/logo.png" alt="" />
+        <Link to='/'><img className="logo" src="/assets/logo.png" alt="" /></Link>
       </div>
       <div className="nav-middle flex-div">
         <div className="search-box flex-div">
