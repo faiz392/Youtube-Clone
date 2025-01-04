@@ -1,76 +1,39 @@
-import React from 'react'
-import './recommend.css'
+import React from "react";
+import "./recommend.css";
+import { API_KEY } from "../../data";
+import { useState, useEffect } from "react";
+import { value_converter } from "../../data";
+import { Link } from "react-router-dom";
 
-const Recommend = () => {
+const Recommend = ({ categoryId }) => {
+  const [apidata, setapidata] = useState([]);
+  const fetchData = async () => {
+    const relatedVideo_url = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&videoCategoryId=${categoryId}&key=${API_KEY}`;
+    await fetch(relatedVideo_url)
+      .then((response) => response.json())
+      .then((data) => setapidata(data.items));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <div className='recommended'>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail1.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail2.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail3.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail4.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail5.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail6.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail7.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      <div className="side-video-list">
-        <img src="/assets/thumbnail8.png" alt="" />
-        <div className="vid-info">
-          <h4>Best channel for music playlist</h4>
-          <p>T-series</p>
-          <p>200k views</p>
-        </div>
-      </div>
-      
+    <div className="recommended">
+      {apidata.map((item, index) => {
+        return (
+          <Link to={`/video/${item.snippet.categoryId}/${item.id}`}key={index} className="side-video-list">
+            <img src={item.snippet.thumbnails.medium.url} alt="" />
+            <div className="vid-info">
+              <h4>{item.snippet.title}</h4>
+              <p>{item.snippet.channelTitle}</p>
+              <p>{value_converter(item.statistics.viewCount)} views</p>
+            </div>
+          </Link>
+        );
+      })}
     </div>
-  )
-}
+  );
+};
 
-export default Recommend
+export default Recommend;
